@@ -16,7 +16,7 @@
 			    value="jdbc:postgresql://ec2-18-235-109-97.compute-1.amazonaws.com:5432/d46mbqu97ilmpq?ssl=true&amp;sslfactory=org.postgresql.ssl.NonValidatingFactory"/>
 	        	<property name="hibernate.connection.driver_class" value="org.postgresql.Driver"/>
 	        	<property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQL9Dialect"/>
-	        	<property name="hibernate.connection.username" value="d46mbqu97ilmpq"/>
+	        	<property name="hibernate.connection.username" value="sxkzrqyazqhiml"/>
 	        	<property name="hibernate.connection.password" value="1950ad4b0a17396dde9c235043716a37659fca77a2ab924fa098ca6f7057518c"/>
 	     
 	      

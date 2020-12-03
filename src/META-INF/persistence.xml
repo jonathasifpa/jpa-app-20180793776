@@ -20,7 +20,7 @@
 	        	<property name="hibernate.connection.password" value="1950ad4b0a17396dde9c235043716a37659fca77a2ab924fa098ca6f7057518c"/>
 	     
 	      
-	    		<property name="javax.persistence.schema-generation.database.action" value="drop-and-create"/> 
+	    		<!-- <property name="javax.persistence.schema-generation.database.action" value="drop-and-create"/> --> 
 	    	 		    	 
 		</properties>
 	</persistence-unit>

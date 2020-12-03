@@ -127,7 +127,11 @@ public class PedidoMB implements Serializable {
 	}
 	
 	public Double getValorPedidos() {
-		return pedidos.stream().mapToDouble(pedido -> pedido.getValorTotal().doubleValue()).sum();
+		double soma = 0D;
+		if(!pedidos.isEmpty())
+			soma = pedidos.stream().mapToDouble(pedido -> pedido.getValorTotal().doubleValue()).sum();
+		
+		return soma; 
 	}
 
 	public Integer getIdCliente() {

@@ -128,6 +128,7 @@ public class PedidoMB implements Serializable {
 	
 	public Double getValorPedidos() {
 		double soma = 0D;
+		List<Pedido> pedidos = dao.getPedidos(idCliente);
 		if(pedidos.size() > 0)
 			soma = pedidos.stream().mapToDouble(pedido -> pedido.getValorTotal().doubleValue()).sum();
 		

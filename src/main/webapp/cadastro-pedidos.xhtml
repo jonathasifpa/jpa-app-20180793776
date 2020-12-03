@@ -1,0 +1,89 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<title>Pedidos</title>
+</h:head>
+<h:body>
+    <p:panel header="Informações do Cliente">
+		Nome: <h:outputText value="#{pedidoMB.nomeCliente}" /> <br></br>
+		Endereço: <h:outputText value="#{pedidoMB.enderecoCliente}" />
+	</p:panel>
+ 	
+ 	<h:form id="formulario">
+		<p:panel id="cadastroPanel" header="Cadastro de Pedidos">
+			<p:focus context="cadastroPanel"/>
+			<p:commandButton id="btnovo" value="Novo Pedido" 
+			     style="margin-top:10px;margin-bottom:10px; width:200px;display:block"
+			     update="formulario" ajax="true" 
+			     action="#{pedidoMB.novoPedido}" />
+			<p:panelGrid columns="2" cellpadding="5">
+				<h:outputText for="produto" value="Produto: " />
+				<p:inputText id="produto" label="Produto" value="#{pedidoMB.pedido.nomeProduto}"
+					size="50" maxlength="50" required="true" styleClass="input-style" />
+
+				<h:outputText for="quantidade" value="Quantidade: " />
+				<p:inputText id="quantidade" label="Quantidade" value="#{pedidoMB.pedido.quantidade}"
+					size="50" maxlength="50" required="true" styleClass="input-style" />
+					
+				<h:outputText for="valorTotal" value="Valor Total: "/>
+				<p:inputText id="valorTotal" label="Valor Total" value="#{pedidoMB.pedido.valorTotal}"
+					size="50" maxlength="50" required="true" styleClass="input-style" />
+
+			</p:panelGrid>
+
+			<p:commandButton id="cadastrar" value="Cadastrar"
+				actionListener="#{pedidoMB.salvar}" style="margin:10px;" update="valorPedidos formulario list-pedidos" ajax="true">
+				<f:param name="clienteID" value="#{param['clienteID']}" />
+			</p:commandButton>
+    		<p:messages />
+			
+			<p:growl id="msgs" showDetail="true" skipDetailIfEqualsSummary="true" />
+		</p:panel>
+	</h:form>
+	<h:panelGroup id="valorPedidos">
+  		<h:outputText style = "font-size: 24px; font-weight: bold;" value="Total de Pedidos: R$#{pedidoMB.getValorPedidos()}"/>
+	</h:panelGroup>
+	<h:form id="list-pedidos">
+	     <p:dataTable id="pedidosList" var="pedido" value="#{pedidoMB.getPedidos()}"  
+	        rows="6" paginator="true"
+	        tableStyle="table-layout: auto;"
+	        sortBy="#{pedido.nomeProduto}">	 
+	        
+		    <p:column headerText="Nome do Produto">
+		        <h:outputText value="#{pedido.nomeProduto}" />
+		    </p:column>
+	 		<p:column headerText="Quantidade">
+		        <h:outputText value="#{pedido.quantidade}" />
+		    </p:column>	    
+		    <p:column headerText="Valor Total">
+		        <h:outputText value="#{pedido.valorTotal}" />
+		    </p:column>	
+		    <p:column headerText="Alterar">
+	           <p:commandButton update="valorPedidos formulario" 
+	                        value="Alterar" icon="fa-edit"
+	                        actionListener="#{pedidoMB.update(pedido.id)}" 
+	                        ajax="true">
+	           </p:commandButton>
+			</p:column>  
+			<p:column headerText="Operações">
+				<p:commandButton update="valorPedidos pedidosList formulario" 
+                        value="Excluir" icon="ui-icon-closethick"
+                        actionListener="#{pedidoMB.delete(pedido.id)}"
+                        ajax="true">
+              		<p:confirm header="Confirmação" message="Confirma a exclusão?" icon="pi pi-exclamation-triangle" />
+           		</p:commandButton>
+			</p:column>      
+	     </p:dataTable>
+	     
+	     <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+	        <p:commandButton value="Sim" type="button" styleClass="ui-confirmdialog-yes" icon="pi pi-check" />
+	        <p:commandButton value="Nao" type="button" styleClass="ui-confirmdialog-no" icon="pi pi-times" />
+	     </p:confirmDialog>
+     
+    </h:form>
+</h:body>
+</html>

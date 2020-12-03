@@ -128,8 +128,8 @@ public class PedidoMB implements Serializable {
 	
 	public Double getValorPedidos() {
 		double soma = 0D;
-		if(!pedidos.isEmpty())
-			soma = pedidos.stream().mapToDouble(pedido -> pedido.getValorTotal().doubleValue()).sum();
+		//if(!pedidos.isEmpty())
+			//soma = pedidos.stream().mapToDouble(pedido -> pedido.getValorTotal().doubleValue()).sum();
 		
 		return soma; 
 	}
